@@ -12,6 +12,5 @@ import java.util.List;
 public interface MedecinRepository extends JpaRepository<Medecin,Long> {
 
 
-    @Query("SELECT  r FROM RendezVous r where  r.dateRDV >=? 1 and r.dateRDV<=? 2 and r.medecin.idMedecin=?3")
-    List<RendezVous> ListRDVBetweenToDate(@PathVariable("dateD") Date dateD , @PathVariable("dateF")Date dateF,@PathVariable Long idMedecin);
+
 }

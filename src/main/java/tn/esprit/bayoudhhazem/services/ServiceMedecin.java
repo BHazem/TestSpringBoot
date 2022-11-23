@@ -7,6 +7,7 @@ import tn.esprit.bayoudhhazem.entities.Clinique;
 import tn.esprit.bayoudhhazem.entities.Medecin;
 import tn.esprit.bayoudhhazem.repositories.CliniqueRepository;
 import tn.esprit.bayoudhhazem.repositories.MedecinRepository;
+import tn.esprit.bayoudhhazem.repositories.RendezVousRepository;
 
 import javax.transaction.Transactional;
 import java.util.Date;
@@ -18,6 +19,8 @@ public class ServiceMedecin implements  IServiceMedecin{
     MedecinRepository medecinRepository;
     CliniqueRepository cliniqueRepository;
 
+    RendezVousRepository rendezVousRepository;
+
     @Override
     @Transactional
     public Medecin addMedecinAndAssignToClinique(Medecin medecin, Long cliniqueId) {
@@ -28,7 +31,7 @@ public class ServiceMedecin implements  IServiceMedecin{
 
     @Override
     public int getRevenuMedecin(Long idMedecin, Date startDate, Date endDate) {
-    int size = medecinRepository.ListRDVBetweenToDate(startDate,endDate,idMedecin).size();
+    int size = rendezVousRepository.ListRDVBetweenToDate(startDate,endDate,idMedecin).size();
     Medecin medecin = medecinRepository.findById(idMedecin).orElse(null);
     int Montant =medecin.getPrixConsultation()*size;
         return Montant;
